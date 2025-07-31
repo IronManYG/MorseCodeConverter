@@ -8,33 +8,11 @@ testing both normal operation and edge cases.
 import unittest
 
 from morse_code import MorseCodeConverter, international_code, InputError
+from test_fixtures import MorseCodeConverterTestCase
 
 
-class TestMorseCodeConverter(unittest.TestCase):
+class TestMorseCodeConverter(MorseCodeConverterTestCase):
     """Test cases for the MorseCodeConverter class."""
-
-    def setUp(self):
-        """Set up test fixtures before each test method."""
-        self.converter = MorseCodeConverter(international_code)
-
-        # Sample test data
-        self.text_samples = {
-            "HELLO": ".... . .-.. .-.. ---",
-            "WORLD": ".-- --- .-. .-.. -..",
-            "SOS": "... --- ...",
-            "1234": ".---- ..--- ...-- ....-",
-            "HELLO WORLD": ".... . .-.. .-.. ---     .-- --- .-. .-.. -..",
-            "!?.": "-.-.-- ..--.. .-.-.-"
-        }
-
-        self.morse_samples = {
-            ".... . .-.. .-.. ---": "HELLO",
-            ".-- --- .-. .-.. -..": "WORLD",
-            "... --- ...": "SOS",
-            ".---- ..--- ...-- ....-": "1234",
-            ".... . .-.. .-.. ---     .-- --- .-. .-.. -..": "HELLO WORLD",
-            "-.-.-- ..--.. .-.-.-": "!?."
-        }
 
     def test_init_valid(self):
         """Test initialization with valid input."""
