@@ -28,17 +28,17 @@ with a checkbox that can be checked off when completed.
 ## 3. Documentation and Comments
 
 [x] Add docstrings to all classes and methods
-[ ] Create a comprehensive API documentation
-[ ] Add inline comments for complex code sections
-[ ] Update README.md with more detailed usage examples
-[ ] Create a user guide with examples
-[ ] Add a CONTRIBUTING.md file with guidelines for contributors
-[ ] Create a CHANGELOG.md to track version changes
-[ ] Add proper LICENSE.txt file as mentioned in README
+[x] Create a comprehensive API documentation
+[x] Add inline comments for complex code sections
+[x] Update README.md with more detailed usage examples
+[x] Create a user guide with examples
+[x] Add a CONTRIBUTING.md file with guidelines for contributors
+[x] Create a CHANGELOG.md to track version changes
+[x] Add proper LICENSE.txt file as mentioned in README
 
 ## 4. Testing
 
-[ ] Create unit tests for the MorseCodeConverter class
+[x] Create unit tests for the MorseCodeConverter class
 [ ] Create unit tests for the MorseCodePlayer class
 [ ] Implement integration tests for the entire application
 [ ] Add test coverage reporting
