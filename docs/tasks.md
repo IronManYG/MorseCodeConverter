@@ -44,12 +44,12 @@ with a checkbox that can be checked off when completed.
 [x] Add test coverage reporting
 [x] Create test fixtures and test data
 [x] Implement continuous integration
-[ ] Add performance benchmarks
-[ ] Create a test plan document
+[x] Add performance benchmarks
+[x] Create a test plan document
 
 ## 5. User Experience
 
-[ ] Improve the command-line interface with better formatting
+[x] Improve the command-line interface with better formatting
 [ ] Add color coding to the terminal output
 [ ] Implement a progress indicator for long operations
 [ ] Add a graphical user interface (GUI)

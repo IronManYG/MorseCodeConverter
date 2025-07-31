@@ -35,16 +35,54 @@ MORSE_TIMING: Dict[str, int] = {
     'word_pause': 7,
 }
 
+# Terminal colors
+COLORS: Dict[str, str] = {
+    'RESET': '\033[0m',
+    'BLACK': '\033[30m',
+    'RED': '\033[31m',
+    'GREEN': '\033[32m',
+    'YELLOW': '\033[33m',
+    'BLUE': '\033[34m',
+    'MAGENTA': '\033[35m',
+    'CYAN': '\033[36m',
+    'WHITE': '\033[37m',
+    'BOLD': '\033[1m',
+    'UNDERLINE': '\033[4m',
+}
+
 # UI configuration
-UI_CONFIG: Dict[str, Union[List[str], str]] = {
+UI_CONFIG: Dict[str, Union[List[str], str, Dict[str, str]]] = {
     'menu_options': [
         '1. Convert Text to Morse Code and Optionally Play Sound',
         '2. Convert Morse Code to Text and Optionally Play Sound',
         '3. Play Morse Code Sound',
         '4. Exit',
     ],
-    'welcome_message': 'Welcome to the International Morse Code Converter and Player',
-    'goodbye_message': 'Thank you for using the Morse Code Converter and Player!',
+    'welcome_message': '''
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║       INTERNATIONAL MORSE CODE CONVERTER AND PLAYER          ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+''',
+    'goodbye_message': '''
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║  Thank you for using the Morse Code Converter and Player!    ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+''',
+    'menu_header': '''
+╔══════════════════════════════════════════════════════════════╗
+║                         MAIN MENU                            ║
+╚══════════════════════════════════════════════════════════════╝
+''',
+    'section_separator': '──────────────────────────────────────────────────────────',
+    'result_header': '''
+╔══════════════════════════════════════════════════════════════╗
+║                          RESULT                              ║
+╚══════════════════════════════════════════════════════════════╝
+''',
 }
 
 # Validation configuration

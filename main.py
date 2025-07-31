@@ -13,6 +13,11 @@ from morse_code import (
     display_menu,
     display_welcome_message,
     display_goodbye_message,
+    display_section_separator,
+    display_result_header,
+    format_result,
+    colorize_error,
+    colorize_warning,
     get_logger,
     DEFAULT_MORSE_VARIANT,
     InputError,
@@ -65,15 +70,20 @@ def main() -> None:
                     )
 
                     if morse_message is None:
-                        print("Failed to convert text to Morse code. Please try again.")
+                        print(colorize_error("Failed to convert text to Morse code. Please try again."))
                         continue
 
-                    print(f"Your Morse code: {morse_message}")
+                    display_result_header()
+                    print(format_result("Your Morse code", morse_message))
+                    display_section_separator()
 
                     if get_yes_or_no("Do you want to play the Morse code sound? (Yes/No): "):
                         logger.debug("Playing Morse code as audio")
                         safe_execute(player.play_morse_code, morse_message)
                         logger.info("Sound playback finished.")
+
+                        print(format_result("Status", "Sound playback completed"))
+                        display_section_separator()
 
                 elif choice == '2':
                     # Morse code to text conversion
@@ -99,15 +109,20 @@ def main() -> None:
                     )
 
                     if text_message is None:
-                        print("Failed to convert Morse code to text. Please try again.")
+                        print(colorize_error("Failed to convert Morse code to text. Please try again."))
                         continue
 
-                    print(f"Your text message: {text_message}")
+                    display_result_header()
+                    print(format_result("Your text message", text_message))
+                    display_section_separator()
 
                     if get_yes_or_no("Do you want to play the Morse code sound? (Yes/No): "):
                         logger.debug("Playing Morse code as audio")
                         safe_execute(player.play_morse_code, morse_code)
                         logger.info("Sound playback finished.")
+
+                        print(format_result("Status", "Sound playback completed"))
+                        display_section_separator()
 
                 elif choice == '3':
                     # Play Morse code as sound
@@ -125,9 +140,16 @@ def main() -> None:
                             f"Only dots (.), dashes (-), and spaces are allowed."
                         )
 
+                    display_result_header()
+                    print(format_result("Playing Morse code", morse_code))
+                    display_section_separator()
+                    
                     logger.debug(f"Playing Morse code as audio: {morse_code}")
                     safe_execute(player.play_morse_code, morse_code)
                     logger.info("Sound playback finished.")
+
+                    print(format_result("Status", "Sound playback completed"))
+                    display_section_separator()
 
                 elif choice == '4':
                     logger.debug("User chose to exit")
@@ -135,24 +157,24 @@ def main() -> None:
 
             except InputError as e:
                 logger.warning(f"Input error: {str(e)}")
-                print(f"Error: {str(e)}")
-                print("Please try again.")
+                print(colorize_warning(f"Error: {str(e)}"))
+                print(colorize_warning("Please try again."))
             except Exception as e:
                 logger.error(f"Error during operation: {str(e)}")
-                print(f"An error occurred: {str(e)}")
-                print("Please try again.")
+                print(colorize_error(f"An error occurred: {str(e)}"))
+                print(colorize_error("Please try again."))
 
         display_goodbye_message()
         logger.info("Morse Code Converter application shutting down")
 
     except KeyboardInterrupt:
         logger.info("Application terminated by user (KeyboardInterrupt)")
-        print("\nApplication terminated by user.")
+        print(colorize_warning("\nApplication terminated by user."))
         display_goodbye_message()
     except Exception as e:
         logger.exception(f"An unexpected error occurred: {str(e)}")
-        print(f"An unexpected error occurred: {str(e)}")
-        print("The application will now exit.")
+        print(colorize_error(f"An unexpected error occurred: {str(e)}"))
+        print(colorize_error("The application will now exit."))
     finally:
         # Ensure resources are properly released
         try:
