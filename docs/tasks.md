@@ -5,10 +5,10 @@ with a checkbox that can be checked off when completed.
 
 ## 1. Code Structure and Organization
 
-[ ] Implement proper package structure with `__init__.py` files
-[ ] Refactor the main.py file to separate UI logic from application logic
-[ ] Create a configuration module for storing application settings
-[ ] Implement a proper logging system instead of using print statements
+[x] Implement proper package structure with `__init__.py` files
+[x] Refactor the main.py file to separate UI logic from application logic
+[x] Create a configuration module for storing application settings
+[x] Implement a proper logging system instead of using print statements
 [ ] Create a dedicated error handling module
 [ ] Implement a factory pattern for creating different types of Morse code converters
 [ ] Add type hints to all functions and methods
@@ -27,7 +27,7 @@ with a checkbox that can be checked off when completed.
 
 ## 3. Documentation and Comments
 
-[ ] Add docstrings to all classes and methods
+[x] Add docstrings to all classes and methods
 [ ] Create a comprehensive API documentation
 [ ] Add inline comments for complex code sections
 [ ] Update README.md with more detailed usage examples

@@ -1,3 +1,11 @@
+"""
+Module containing Morse code dictionaries for different standards.
+
+This module provides dictionaries that map characters (letters, numbers, and special characters)
+to their corresponding Morse code representations for different Morse code standards.
+"""
+
+# International Morse code dictionary (ITU standard)
 international_code = {
     'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.',
     'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
