@@ -9,8 +9,8 @@ with a checkbox that can be checked off when completed.
 [x] Refactor the main.py file to separate UI logic from application logic
 [x] Create a configuration module for storing application settings
 [x] Implement a proper logging system instead of using print statements
-[ ] Create a dedicated error handling module
-[ ] Implement a factory pattern for creating different types of Morse code converters
+[x] Create a dedicated error handling module
+[x] Implement a factory pattern for creating different types of Morse code converters
 [ ] Add type hints to all functions and methods
 [ ] Implement proper exception classes for the application
 
@@ -18,8 +18,8 @@ with a checkbox that can be checked off when completed.
 
 [ ] Add input validation for all user inputs in main.py
 [ ] Improve error handling in the MorseCodeConverter class
-[ ] Add proper error handling for pygame initialization in MorseCodePlayer
-[ ] Implement validation for Morse code input in from_morse_code method
+[x] Add proper error handling for pygame initialization in MorseCodePlayer
+[x] Implement validation for Morse code input in from_morse_code method
 [ ] Add error handling for file operations (if added in future)
 [ ] Implement graceful exit handling
 [ ] Add validation for configuration parameters

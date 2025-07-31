@@ -1,7 +1,7 @@
 """
 Test script to verify error handling improvements in the MorseCodeConverter class.
 """
-from morse_code import MorseCodeConverter, international_code
+from morse_code import MorseCodeConverter, international_code, InputError
 
 
 def test_converter_initialization():
@@ -48,8 +48,8 @@ def test_to_morse_code():
     try:
         result = converter.to_morse_code("")
         print(f"✗ Empty input did not raise an exception")
-    except MorseCodeConverter.InvalidInputError as e:
-        print(f"✓ Empty input correctly raised InvalidInputError: {e}")
+    except InputError as e:
+        print(f"✓ Empty input correctly raised InputError: {e}")
     except Exception as e:
         print(f"✗ Empty input raised unexpected exception: {e}")
 
@@ -86,8 +86,8 @@ def test_from_morse_code():
     try:
         result = converter.from_morse_code("")
         print(f"✗ Empty input did not raise an exception")
-    except MorseCodeConverter.InvalidInputError as e:
-        print(f"✓ Empty input correctly raised InvalidInputError: {e}")
+    except InputError as e:
+        print(f"✓ Empty input correctly raised InputError: {e}")
     except Exception as e:
         print(f"✗ Empty input raised unexpected exception: {e}")
 
@@ -104,8 +104,8 @@ def test_from_morse_code():
     try:
         result = converter.from_morse_code("... --- ... !")
         print(f"✗ Input with invalid characters did not raise an exception")
-    except MorseCodeConverter.InvalidInputError as e:
-        print(f"✓ Input with invalid characters correctly raised InvalidInputError: {e}")
+    except InputError as e:
+        print(f"✓ Input with invalid characters correctly raised InputError: {e}")
     except Exception as e:
         print(f"✗ Input with invalid characters raised unexpected exception: {e}")
 

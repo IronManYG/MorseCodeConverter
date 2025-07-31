@@ -6,15 +6,15 @@ converting Morse code to text, and playing Morse code as audio.
 """
 
 from morse_code import (
-    MorseCodeConverter,
+    MorseCodeConverterFactory,
     MorseCodePlayer,
-    international_code,
     get_user_choice,
     get_yes_or_no,
     display_menu,
     display_welcome_message,
     display_goodbye_message,
-    get_logger
+    get_logger,
+    DEFAULT_MORSE_VARIANT
 )
 
 # Create a logger for this module
@@ -32,9 +32,9 @@ def main():
 
     try:
         # Initialize components
-        international_converter = MorseCodeConverter(international_code)
+        international_converter = MorseCodeConverterFactory.create_converter(DEFAULT_MORSE_VARIANT)
         player = MorseCodePlayer()
-        logger.debug("Initialized converter and player")
+        logger.debug(f"Initialized converter for {DEFAULT_MORSE_VARIANT} variant and player")
 
         display_welcome_message()
 

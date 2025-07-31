@@ -18,6 +18,7 @@ from .errors import (
     MorseCodeError, InputError, ConversionError, AudioError, ConfigurationError,
     handle_error, safe_execute
 )
+from .factory import MorseCodeConverterFactory
 from .logging_config import get_logger, debug, info, warning, error, critical, exception
 from .morse_code_data import international_code
 from .morse_code_player import MorseCodePlayer
@@ -28,6 +29,7 @@ __all__ = [
     'MorseCodeConverter',
     'MorseCodePlayer',
     'international_code',
+    'MorseCodeConverterFactory',
 
     # UI functions
     'get_user_choice',
