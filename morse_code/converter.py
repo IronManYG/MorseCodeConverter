@@ -115,21 +115,34 @@ class MorseCodeConverter:
                 f"Only dots (.), dashes (-), and spaces are allowed."
             )
 
-        # Invert the Morse code dictionary
+        # Invert the Morse code dictionary to map Morse codes to characters
+        # This creates a new dictionary where the keys are Morse codes and the values are characters
+        # For example, {'A': '.-'} becomes {'.-': 'A'}
+        # This allows us to look up a Morse code and find the corresponding character
         text_dict: Dict[str, str] = {v: k for k, v in self.morse_code_dict.items()}
 
-        # Split the Morse code string into words and then characters
+        # Split the Morse code string into words using three spaces as the delimiter
+        # In Morse code, words are separated by three spaces
+        # For example, ".... . .-.. .-.. ---   .-- --- .-. .-.. -.." represents "HELLO WORLD"
         morse_words: List[str] = morse_string.split('   ')  # Three spaces to separate words
-        decoded_message: List[str] = []
-        invalid_codes: List[str] = []
+        decoded_message: List[str] = []  # Will hold the decoded words
+        invalid_codes: List[str] = []  # Will track any invalid Morse codes encountered
 
+        # Process each word in the Morse code string
         for word in morse_words:
-            decoded_chars: List[str] = []
+            decoded_chars: List[str] = []  # Will hold the decoded characters for this word
+
+            # Split the word into individual Morse code characters
+            # In Morse code, characters within a word are separated by a single space
             for char in word.split():
                 if char in text_dict:
+                    # If the Morse code is valid, look up the corresponding character
                     decoded_chars.append(text_dict[char])
                 else:
+                    # If the Morse code is not valid, track it for later reporting
                     invalid_codes.append(char)
+
+            # Join the decoded characters to form a word and add it to the decoded message
             decoded_message.append(''.join(decoded_chars))
 
         # Report invalid Morse codes

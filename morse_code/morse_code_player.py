@@ -5,10 +5,11 @@ This module provides the MorseCodePlayer class for generating and playing
 audio representations of Morse code using pygame.
 """
 
-import pygame
-import numpy as np
 import time
-from typing import Optional, Union, Set, List, Dict, Any, Tuple
+from typing import Optional, Union
+
+import numpy as np
+import pygame
 
 from .config import AUDIO_CONFIG, MORSE_TIMING
 from .errors import AudioError, InputError
@@ -110,12 +111,19 @@ class MorseCodePlayer:
             channels = mixer_params[2]
             total_samples = int(duration * sample_rate)
 
-            # Generate sine wave
+            # Generate sine wave using the formula: amplitude * sin(2π * frequency * time)
+            # np.arange(total_samples) creates an array of sample indices
+            # Dividing by sample_rate converts indices to time in seconds
+            # Multiplying by 2π and frequency gives the angle in radians
+            # sin() generates values between -1 and 1
+            # Multiplying by 32767 * 0.5 scales to 16-bit audio range (-32768 to 32767) at half volume
             wave_samples = (
                     np.sin(2 * np.pi * np.arange(total_samples) * self.frequency / sample_rate) * 32767 * 0.5).astype(
                 np.int16)
 
+            # For stereo output, we need to duplicate the mono channel
             if channels == 2:  # For stereo, duplicate the array
+                # Reshape to a column vector and repeat it to create two identical channels
                 wave_samples = np.repeat(wave_samples.reshape(total_samples, 1), 2, axis=1)
 
             # Create sound object
@@ -169,22 +177,36 @@ class MorseCodePlayer:
                 f"The Morse code string contains invalid characters that will be treated as pauses: {', '.join(unique_invalid)}")
 
         try:
+            # Process each character in the Morse code string
             for char in morse_string:
                 if char == '.':
+                    # For a dot, play a short beep (1 unit duration)
+                    # Convert from milliseconds to seconds by dividing by 1000
                     sound = self.create_sine_wave(self.dot_length / 1000.0)
                     sound.play()
                     logger.debug("Playing dot")
                 elif char == '-':
+                    # For a dash, play a longer beep (3 units duration)
+                    # Convert from milliseconds to seconds by dividing by 1000
                     sound = self.create_sine_wave(self.dash_length / 1000.0)
                     sound.play()
                     logger.debug("Playing dash")
                 elif char == ' ':
+                    # For a space, pause for the character pause duration (3 units)
+                    # This represents the space between characters
                     time.sleep(self.char_pause)
                     logger.debug("Pausing for character space")
                 else:
+                    # For any invalid character, treat it as a pause
                     logger.debug(f"Ignoring invalid character: {char}")
                     time.sleep(self.pause)
+
+                # After each element (dot or dash), pause for 1 unit
+                # This is the standard pause between elements within a character
                 time.sleep(self.pause)
+
+            # After playing the entire string, pause for the word pause duration (7 units)
+            # This represents the space between words and provides a clear ending
             time.sleep(self.word_pause)
             logger.debug("Finished playing Morse code")
         except Exception as e:
