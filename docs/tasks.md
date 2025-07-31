@@ -39,11 +39,11 @@ with a checkbox that can be checked off when completed.
 ## 4. Testing
 
 [x] Create unit tests for the MorseCodeConverter class
-[ ] Create unit tests for the MorseCodePlayer class
-[ ] Implement integration tests for the entire application
-[ ] Add test coverage reporting
-[ ] Create test fixtures and test data
-[ ] Implement continuous integration
+[x] Create unit tests for the MorseCodePlayer class
+[x] Implement integration tests for the entire application
+[x] Add test coverage reporting
+[x] Create test fixtures and test data
+[x] Implement continuous integration
 [ ] Add performance benchmarks
 [ ] Create a test plan document
 
