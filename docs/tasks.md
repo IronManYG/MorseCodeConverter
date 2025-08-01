@@ -50,11 +50,11 @@ with a checkbox that can be checked off when completed.
 ## 5. User Experience
 
 [x] Improve the command-line interface with better formatting
-[ ] Add color coding to the terminal output
-[ ] Implement a progress indicator for long operations
-[ ] Add a graphical user interface (GUI)
-[ ] Implement keyboard shortcuts for common operations
-[ ] Add a history feature to recall previous conversions
+[x] Add color coding to the terminal output
+[x] Implement a progress indicator for long operations
+[x] Add a graphical user interface (GUI)
+[x] Implement keyboard shortcuts for common operations
+[x] Add a history feature to recall previous conversions
 [ ] Implement a save/load feature for conversions
 [ ] Add internationalization support for UI messages
 

@@ -14,6 +14,7 @@ import pygame
 from .config import AUDIO_CONFIG, MORSE_TIMING
 from .errors import AudioError, InputError
 from .logging_config import get_logger
+from .ui import display_progress_bar
 
 # Create a logger for this module
 logger = get_logger(__name__)
@@ -136,7 +137,7 @@ class MorseCodePlayer:
             logger.error(error_msg)
             raise AudioError(error_msg) from e
 
-    def play_morse_code(self, morse_string):
+    def play_morse_code(self, morse_string, show_progress: bool = True):
         """
         Play a Morse code string as audio.
         
@@ -146,6 +147,8 @@ class MorseCodePlayer:
         Args:
             morse_string (str): The Morse code string to play.
                                Should contain only dots (.), dashes (-), and spaces.
+            show_progress (bool, optional): Whether to show a progress bar during playback.
+                                           Defaults to True.
         
         Note:
             - Dots are played as short beeps (1 unit duration)
@@ -177,8 +180,21 @@ class MorseCodePlayer:
                 f"The Morse code string contains invalid characters that will be treated as pauses: {', '.join(unique_invalid)}")
 
         try:
+            # Get the total length of the Morse code string for progress calculation
+            total_chars = len(morse_string)
+            
             # Process each character in the Morse code string
-            for char in morse_string:
+            for i, char in enumerate(morse_string):
+                # Update progress bar if requested
+                if show_progress:
+                    display_progress_bar(
+                        i + 1,
+                        total_chars,
+                        prefix='Playing Morse Code:',
+                        suffix=f'Character {i + 1}/{total_chars}',
+                        length=40
+                    )
+                
                 if char == '.':
                     # For a dot, play a short beep (1 unit duration)
                     # Convert from milliseconds to seconds by dividing by 1000
@@ -208,6 +224,17 @@ class MorseCodePlayer:
             # After playing the entire string, pause for the word pause duration (7 units)
             # This represents the space between words and provides a clear ending
             time.sleep(self.word_pause)
+
+            # Show final progress if requested
+            if show_progress:
+                display_progress_bar(
+                    total_chars,
+                    total_chars,
+                    prefix='Playing Morse Code:',
+                    suffix='Complete',
+                    length=40
+                )
+                
             logger.debug("Finished playing Morse code")
         except Exception as e:
             error_msg = f"Error during Morse code playback: {str(e)}"

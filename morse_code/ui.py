@@ -5,7 +5,9 @@ This module provides functions for handling user interaction in the
 Morse Code Converter application, including menu display and input validation.
 """
 
-from typing import Set
+import sys
+import time
+from typing import Set, Callable
 
 from .config import UI_CONFIG, VALIDATION_CONFIG, COLORS
 
@@ -215,3 +217,60 @@ def format_result(label: str, value: str) -> str:
         str: The formatted result string.
     """
     return f"  {colorize(label, 'YELLOW', bold=True)}: {colorize(value, 'GREEN')}"
+
+
+def display_progress_bar(current: int, total: int, prefix: str = '', suffix: str = '',
+                         length: int = 50, fill: str = '█', print_end: str = '\r') -> None:
+    """
+    Display a progress bar in the terminal.
+    
+    This function displays a progress bar in the terminal to show the progress of long operations.
+    
+    Args:
+        current (int): Current progress value.
+        total (int): Total value representing 100% progress.
+        prefix (str, optional): Text to display before the progress bar. Defaults to ''.
+        suffix (str, optional): Text to display after the progress bar. Defaults to ''.
+        length (int, optional): Length of the progress bar in characters. Defaults to 50.
+        fill (str, optional): Character to use for the filled part of the progress bar. Defaults to '█'.
+        print_end (str, optional): Character to print at the end. Defaults to '\r' for overwriting the line.
+        
+    Returns:
+        None
+    """
+    # Calculate the percentage and number of filled characters
+    percent = current / total * 100
+    filled_length = int(length * current // total)
+
+    # Create the progress bar string
+    bar = colorize(fill * filled_length, 'GREEN') + colorize('-' * (length - filled_length), 'WHITE')
+
+    # Print the progress bar
+    progress_text = f'\r{prefix} |{bar}| {percent:.1f}% {suffix}'
+    sys.stdout.write(progress_text + print_end)
+    sys.stdout.flush()
+
+    # Print a new line when progress is complete
+    if current == total:
+        print()
+
+
+def run_with_progress(operation: Callable, items: list, description: str = 'Processing') -> None:
+    """
+    Run an operation on a list of items with a progress bar.
+    
+    This function runs an operation on each item in a list and displays a progress bar.
+    
+    Args:
+        operation (Callable): The operation to run on each item.
+        items (list): The list of items to process.
+        description (str, optional): Description of the operation for the progress bar. Defaults to 'Processing'.
+        
+    Returns:
+        None
+    """
+    total = len(items)
+    for i, item in enumerate(items, 1):
+        operation(item)
+        display_progress_bar(i, total, prefix=f'{description}:', suffix='Complete', length=40)
+        time.sleep(0.01)  # Small delay to make the progress visible

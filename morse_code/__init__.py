@@ -6,7 +6,7 @@ This package provides the core functionality for the Morse Code Converter applic
 - Converting Morse code to text
 - Playing Morse code as audio
 - Morse code dictionaries for different standards
-- User interface functions
+- User interface functions (CLI and GUI)
 - Configuration settings
 - Logging system
 - Error handling
@@ -19,13 +19,15 @@ from .errors import (
     handle_error, safe_execute
 )
 from .factory import MorseCodeConverterFactory
+from .gui import MorseCodeConverterGUI, run_gui
 from .logging_config import get_logger, debug, info, warning, error, critical, exception
 from .morse_code_data import international_code
 from .morse_code_player import MorseCodePlayer
 from .ui import (
     get_user_choice, get_yes_or_no, display_menu, display_welcome_message, display_goodbye_message,
     display_section_separator, display_result_header, format_result,
-    colorize, colorize_header, colorize_result, colorize_error, colorize_warning
+    colorize, colorize_header, colorize_result, colorize_error, colorize_warning,
+    display_progress_bar, run_with_progress
 )
 
 __all__ = [
@@ -35,7 +37,7 @@ __all__ = [
     'international_code',
     'MorseCodeConverterFactory',
 
-    # UI functions
+    # UI functions (CLI)
     'get_user_choice',
     'get_yes_or_no',
     'display_menu',
@@ -49,6 +51,12 @@ __all__ = [
     'colorize_result',
     'colorize_error',
     'colorize_warning',
+    'display_progress_bar',
+    'run_with_progress',
+
+    # UI functions (GUI)
+    'MorseCodeConverterGUI',
+    'run_gui',
 
     # Configuration
     'AUDIO_CONFIG',
